@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script src="jquery.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+<p id="demo"></p>
+    <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+  <script type="text/javascript">
+
+/*$.get( "../api/v1/posts.php", function( data ) {
+  var dane = JSON.stringify(data);
+  document.write(dane);
+});*/ 
+
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.stringify(this.response);
+        document.getElementById("demo").innerHTML = myObj;
+    }
+};
+xmlhttp.open("GET", "api/v1/posts.php", true);
+xmlhttp.send();
+
+
+
+</script>
+  </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+  <script src="jquery.min.js"></script>
+</html>
