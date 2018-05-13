@@ -40,7 +40,7 @@
           </form>';
       }
     ?>
-    <div class="row">
+    <div class="row">ss
       <?php
         printPosts();
       ?>
