@@ -51,7 +51,7 @@
 			$_SESSION['e_haslo']="Podane hasła nie są identyczne!";
 		}
 
-		$haslo_hash = password_hash($haslo1, PASSWORD_DEFAULT);
+		$haslo_hash = password_hash($haslo1, PASSWORD_ARGON2I);
 
 		//Czy zaakceptowano regulamin?
 		if (!isset($_POST['regulamin']))
@@ -113,7 +113,7 @@
 				{
 					//Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
 
-					if ($polaczenie->query("INSERT INTO uzytkownicy VALUES ('$nick', '$haslo_hash', '$email', NULL, 0, 0)"))
+					if ($polaczenie->query("INSERT INTO uzytkownicy(nick,haslo,email) VALUES ('$nick', '$haslo_hash', '$email')"))
 					{
 						$_SESSION['udanarejestracja']=true;
 						header('Location: ../index.php');

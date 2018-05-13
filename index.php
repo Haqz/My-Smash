@@ -1,15 +1,8 @@
 <?php
   include 'configs/information.php';
-
-
 	session_start();
-
 	//error_reporting(0);
-
-	if ((isset($_SESSION['zalogowany'])))
-	{
 		include 'func/addPost.php';
-	}
 
 ?>
 <!DOCTYPE HTML>
@@ -26,9 +19,10 @@
 </head>
 <body>
 
-  <?php include 'page/menu.php'; ?>
-  <?php
-  	if(isset($_SESSION['blad']))	echo '<div class="alert alert-danger" role="alert">'.$_SESSION['blad'].'</div>';
+  <?php include 'page/menu.php'; 
+  	if(isset($_SESSION['blad'])){
+      echo '<div class="alert alert-danger" role="alert" style="color: white">'.$_SESSION['blad'].'</div>';
+    }	
 
   ?>
 

@@ -1,0 +1,15 @@
+
+#container{
+	width: 900px;
+	margin: auto;
+	font-family: 'Work Sans', sans-serif;
+	padding-left: 0.33%;
+	padding-right: 0.33%;
+	padding-bottom: 0.66%;
+	margin-top: 0px;
+	box-shadow: -10px -5px 15px #888888, 10px 5px 15px #888888;
+	background-color: #FFE3EC;
+}
+tr{
+	background-color: grey;
+}
