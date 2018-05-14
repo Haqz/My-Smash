@@ -1,4 +1,5 @@
 <?php
+$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
 	function checkLoginState(){
 		if($_SESSION['zalogowany']){
 			return true;
@@ -35,7 +36,6 @@
             break;
     	}
 
-    	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
     	$id = $_SESSION['id'];
         foreach($db->query("SELECT Count(user_id) AS id FROM posty WHERE user_id=$id") as $row) {
         	echo'
@@ -80,5 +80,5 @@
         </div>
           ';
         }
-}
+	}
 ?>

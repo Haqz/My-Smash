@@ -1,10 +1,11 @@
 <?php
   include 'configs/information.php';
-  include 'func/print_posts.php';
   include 'func/main.php';
 	session_start();
 	//error_reporting(0);
-		include 'func/addPost.php';
+  if(isset($_POST['post'])){
+    addPost();
+  }
 
 ?>
 <!DOCTYPE HTML>
@@ -40,7 +41,7 @@
           </form>';
       }
     ?>
-    <div class="row">ss
+    <div class="row">
       <?php
         printPosts();
       ?>
