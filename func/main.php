@@ -1,5 +1,5 @@
 <?php
-$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
+require_once '../configs/connect.php';
 	function checkLoginState(){
 		if($_SESSION['zalogowany']){
 			return true;
@@ -26,6 +26,7 @@ $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '
         $_SESSION['ip'] = $ipaddress;
     }
     function printProfile(){
+    	global $db;
     	$uis = "";
     	switch ($_SESSION['perm']) {
         	case 1:
@@ -52,6 +53,7 @@ $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '
         }
     }
     function addPost(){
+    	global $db;
     	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
 
 		$sql = "SELECT * FROM posty";
@@ -67,7 +69,7 @@ $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '
 		}
     }
     function printPosts(){
-	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
+	global $db;
 	foreach($db->query('SELECT * FROM `posty` ORDER BY `posty`.`id` DESC') as $row) {
         	echo'
 
