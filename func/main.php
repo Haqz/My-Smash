@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../configs/connect.php');
+=======
+$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
+>>>>>>> parent of 90ea3e5... minor manor
 	function checkLoginState(){
 		if($_SESSION['zalogowany']){
 			return true;
@@ -26,7 +30,6 @@ require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../co
         $_SESSION['ip'] = $ipaddress;
     }
     function printProfile(){
-    	global $db;
     	$uis = "";
     	switch ($_SESSION['perm']) {
         	case 1:
@@ -53,7 +56,11 @@ require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../co
         }
     }
     function addPost(){
+<<<<<<< HEAD
     	global $db;
+=======
+    	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
+>>>>>>> parent of 90ea3e5... minor manor
 
 		$sql = "SELECT * FROM posty";
 		$result = $db->query($sql);
@@ -68,7 +75,7 @@ require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../co
 		}
     }
     function printPosts(){
-	global $db;
+	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
 	foreach($db->query('SELECT * FROM `posty` ORDER BY `posty`.`id` DESC') as $row) {
         	echo'
 
