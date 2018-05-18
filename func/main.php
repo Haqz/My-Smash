@@ -1,5 +1,5 @@
 <?php
-require_once '../configs/connect.php';
+require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../configs/connect.php');
 	function checkLoginState(){
 		if($_SESSION['zalogowany']){
 			return true;
@@ -54,7 +54,6 @@ require_once '../configs/connect.php';
     }
     function addPost(){
     	global $db;
-    	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
 
 		$sql = "SELECT * FROM posty";
 		$result = $db->query($sql);

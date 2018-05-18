@@ -15,7 +15,7 @@
 /*=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 			Login section
   =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
-	$app->get('/posts[/{arg}]', function(Request $request, Response $response, $args) {
+	$app->get('/get_posts[/{arg}]', function(Request $request, Response $response, $args) {
 	    $app = \Slim\Slim::getInstance();
 	    $arg = $request->getAttribute('arg');
 	    try{

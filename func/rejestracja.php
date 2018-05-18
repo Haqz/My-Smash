@@ -7,7 +7,7 @@
 	if (isset($_POST['email']))
 	{
 		//Udana walidacja? Załóżmy, że tak!
-		$wszystko_OK=true;
+		$passed=true;
 
 		//Sprawdź poprawność nickname'a
 		$nick = $_POST['nick'];
@@ -15,13 +15,17 @@
 		//Sprawdzenie długości nicka
 		if ((strlen($nick)<3) || (strlen($nick)>20))
 		{
-			$wszystko_OK=false;
+			$passed=false;
 			$_SESSION['e_nick']="Nick musi posiadać od 3 do 20 znaków!";
+		}
+		if (preg_match('#[a-zA-Z]+#', $nick) == false) {
+			$passed=false;
+			$_SESSION['e_nick']="Nie może szkodzić stronie!";
 		}
 
 		if (ctype_alnum($nick)==false)
 		{
-			$wszystko_OK=false;
+			$passed=false;
 			$_SESSION['e_nick']="Nick może składać się tylko z liter i cyfr (bez polskich znaków)";
 		}
 
@@ -31,32 +35,32 @@
 
 		if ((filter_var($emailB, FILTER_VALIDATE_EMAIL)==false) || ($emailB!=$email))
 		{
-			$wszystko_OK=false;
+			$passed=false;
 			$_SESSION['e_email']="Podaj poprawny adres e-mail!";
 		}
 
 		//Sprawdź poprawność hasła
-		$haslo1 = $_POST['haslo1'];
-		$haslo2 = $_POST['haslo2'];
+		$pass1 = $_POST['pass1'];
+		$pass2 = $_POST['pass2'];
 
-		if ((strlen($haslo1)<8) || (strlen($haslo1)>20))
+		if ((strlen($pass1)<8) || (strlen($pass1)>20))
 		{
-			$wszystko_OK=false;
-			$_SESSION['e_haslo']="Hasło musi posiadać od 8 do 20 znaków!";
+			$passed=false;
+			$_SESSION['e_pass']="Hasło musi posiadać od 8 do 20 znaków!";
 		}
 
-		if ($haslo1!=$haslo2)
+		if ($pass1!=$pass2)
 		{
-			$wszystko_OK=false;
-			$_SESSION['e_haslo']="Podane hasła nie są identyczne!";
+			$passed=false;
+			$_SESSION['e_pass']="Podane hasła nie są identyczne!";
 		}
 
-		$haslo_hash = password_hash($haslo1, PASSWORD_ARGON2I);
+		$passHash = password_hash($pass1, PASSWORD_BCRYPT);
 
 		//Czy zaakceptowano regulamin?
 		if (!isset($_POST['regulamin']))
 		{
-			$wszystko_OK=false;
+			$passed=false;
 			$_SESSION['e_regulamin']="Potwierdź akceptację regulaminu!";
 		}
 
@@ -67,8 +71,8 @@
 		//Zapamiętaj wprowadzone dane
 		$_SESSION['fr_nick'] = $nick;
 		$_SESSION['fr_email'] = $email;
-		$_SESSION['fr_haslo1'] = $haslo1;
-		$_SESSION['fr_haslo2'] = $haslo2;
+		$_SESSION['fr_pass1'] = $pass1;
+		$_SESSION['fr_pass2'] = $pass2;
 		if (isset($_POST['regulamin'])) $_SESSION['fr_regulamin'] = true;
 
 		require_once "../configs/connect.php";
@@ -91,7 +95,7 @@
 				$ile_takich_maili = $rezultat->num_rows;
 				if($ile_takich_maili>0)
 				{
-					$wszystko_OK=false;
+					$passed=false;
 					$_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail!";
 				}
 
@@ -103,17 +107,17 @@
 				$ile_takich_nickow = $rezultat->num_rows;
 				if($ile_takich_nickow>0)
 				{
-					$wszystko_OK=false;
+					$passed=false;
 					$_SESSION['e_nick']="Istnieje już gracz o takim nicku! Wybierz inny.";
 				}
 
 
 
-				if ($wszystko_OK==true)
+				if ($passed==true)
 				{
 					//Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
-
-					if ($polaczenie->query("INSERT INTO uzytkownicy(nick,haslo,email) VALUES ('$nick', '$haslo_hash', '$email')"))
+					$token = bin2hex(openssl_random_pseudo_bytes(32));
+					if ($polaczenie->query("INSERT INTO uzytkownicy(nick,pass,email,token) VALUES ('$nick', '$passHash', '$email','$token')"))
 					{
 						$_SESSION['udanarejestracja']=true;
 						header('Location: ../index.php');
@@ -208,12 +212,12 @@
 			    <label for="inputEmail3" class="col-xs-6 col-md-4 control-label">Hasło</label>
 			    <div class="col-xs-9 col-md-4">
 					<input type="password" class="form-control" placeholder="Hasło" value="<?php
-						if (isset($_SESSION['fr_haslo1']))
+						if (isset($_SESSION['fr_pass1']))
 						{
-							echo $_SESSION['fr_haslo1'];
-							unset($_SESSION['fr_haslo1']);
+							echo $_SESSION['fr_pass1'];
+							unset($_SESSION['fr_pass1']);
 						}
-						?>" name="haslo1" />
+						?>" name="pass1" />
 			    </div>
 		  	</div>
 			<div class="col-xs-6 col-md-4"></div>
@@ -225,12 +229,12 @@
 				<label for="inputEmail3" class="col-xs-6 col-md-4 control-label">Powtórz Hasło</label>
 				<div class="col-xs-6 col-md-4">
 					<input type="password" class="form-control" placeholder="Powtórz Hasło" value="<?php
-						if (isset($_SESSION['fr_haslo2']))
+						if (isset($_SESSION['fr_pass2']))
 						{
-							echo $_SESSION['fr_haslo2'];
-							unset($_SESSION['fr_haslo2']);
+							echo $_SESSION['fr_pass2'];
+							unset($_SESSION['fr_pass2']);
 						}
-					?>" name="haslo2" />
+					?>" name="pass2" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-md-4"></div>
@@ -286,10 +290,10 @@
 			{
 				echo '<div class="error">'.$_SESSION['e_email'].'</div>';
 				unset($_SESSION['e_email']);
-			} elseif (isset($_SESSION['e_haslo']))
+			} elseif (isset($_SESSION['e_pass']))
 			{
-				echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
-				unset($_SESSION['e_haslo']);
+				echo '<div class="error">'.$_SESSION['e_pass'].'</div>';
+				unset($_SESSION['e_pass']);
 			} elseif (isset($_SESSION['e_regulamin']))
 			{
 				echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
