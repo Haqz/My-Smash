@@ -44,8 +44,6 @@
     <div class="row">
       <?php
         printPosts();
-        $res = password_hash('password', PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
-        echo "    ssasdasdasdasd";
       ?>
     </div>
   </div>

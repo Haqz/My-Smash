@@ -10,11 +10,11 @@
 
 	require_once "../configs/connect.php";
 
-	$conn = @new mysqli($host, $db_user, $db_password, $db_name);
+	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
 	
-	if ($conn->connect_errno!=0)
+	if ($polaczenie->connect_errno!=0)
 	{
-		echo "Error: ".$conn->connect_errno;
+		echo "Error: ".$polaczenie->connect_errno;
 	}
 	else
 	{
@@ -23,14 +23,14 @@
 		
 		$login = htmlentities($login, ENT_QUOTES, "UTF-8");
 	
-		if ($result = @$conn->query(
+		if ($rezultat = @$polaczenie->query(
 		sprintf("SELECT * FROM uzytkownicy WHERE nick='%s'",
-		mysqli_real_escape_string($conn,$login))))
+		mysqli_real_escape_string($polaczenie,$login))))
 		{
-			$ilu_userow = $result->num_rows;
+			$ilu_userow = $rezultat->num_rows;
 			if($ilu_userow>0)
 			{
-				$wiersz = $result->fetch_assoc();
+				$wiersz = $rezultat->fetch_assoc();
 				
 				if (password_verify($haslo, $wiersz['haslo']))
 				{
@@ -41,7 +41,7 @@
 					$_SESSION['perm'] = $wiersz['perm'];
 					
 					unset($_SESSION['blad']);
-					$result->free_result();
+					$rezultat->free_result();
 					header('Location: gra.php');
 				}
 				else 
@@ -59,7 +59,7 @@
 			
 		}
 		
-		$conn->close();
+		$polaczenie->close();
 	}
 	
 ?>

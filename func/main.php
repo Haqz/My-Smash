@@ -1,9 +1,13 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../configs/connect.php');
 =======
 $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
 >>>>>>> parent of 90ea3e5... minor manor
+=======
+require_once '../configs/connect.php';
+>>>>>>> parent of 51ed7c7... 0.6.3b
 	function checkLoginState(){
 		if($_SESSION['zalogowany']){
 			return true;
@@ -58,9 +62,13 @@ $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '
     function addPost(){
 <<<<<<< HEAD
     	global $db;
+<<<<<<< HEAD
 =======
     	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
 >>>>>>> parent of 90ea3e5... minor manor
+=======
+    	$db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
+>>>>>>> parent of 51ed7c7... 0.6.3b
 
 		$sql = "SELECT * FROM posty";
 		$result = $db->query($sql);
