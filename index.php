@@ -21,7 +21,6 @@
   <?php include 'configs/style.php'; ?>
 </head>
 <body>
-
   <?php 
   include 'page/menu.php'; 
   	if(isset($_SESSION['blad'])){
@@ -45,6 +44,7 @@
       <?php
         printPosts();
       ?>
+      
     </div>
   </div>
 </body>

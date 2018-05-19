@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 07 Sie 2017, 12:34
--- Wersja serwera: 10.1.25-MariaDB
--- Wersja PHP: 7.1.7
+-- Czas generowania: 19 Maj 2018, 16:27
+-- Wersja serwera: 10.1.32-MariaDB
+-- Wersja PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -56,22 +56,19 @@ INSERT INTO `posty` (`content`, `id`, `creator`, `user_id`) VALUES
 
 CREATE TABLE `uzytkownicy` (
   `nick` text NOT NULL,
-  `haslo` text NOT NULL,
+  `pass` text NOT NULL,
   `email` text NOT NULL,
   `id` int(11) NOT NULL,
   `perm` int(11) NOT NULL,
-  `avatar` varchar(200) NOT NULL
+  `token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `uzytkownicy`
 --
 
-INSERT INTO `uzytkownicy` (`nick`, `haslo`, `email`, `id`, `perm`, `avatar`) VALUES
-('Haqz', '$2y$10$bZNmf6nddlmBY4i1aEkCHu7tNqmtIv0rnHpukY0m.yRCOwaYFTcZG', 'maszynista91@gmail.com', 13, 1, '0'),
-('Eldo', '$2y$10$f8asHBGjHQireSN0pZlRwuEHD7wQ441tNOMm6pnZVI/v/OM9YjTdW', 'maaszynista91@gmail.com', 14, 0, '0'),
-('sad', '$2y$10$2FoEJNVVLoMTIpIzABCwg.QE3T4kyBAbFoYucucQBsQw8rukBnk0G', 'amaszynista91@gmail.com', 15, 0, '0'),
-('ASDF', '$2y$10$1bqBGBBcmyr6NVwYeffdX.rxwIGFzYddYGyPylHMhyIM2dwpfNsvW', 'ASDF@GM.com', 16, 0, '');
+INSERT INTO `uzytkownicy` (`nick`, `pass`, `email`, `id`, `perm`, `token`) VALUES
+('12345678', '$2y$10$ks/VnJzleWBBdOVcSX3Y7uJc3Swt/LA8iRcZ0ATGxJiDnpqs0cEEC', '12345678@gmai.co', 30, 0, '');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -98,11 +95,13 @@ ALTER TABLE `uzytkownicy`
 --
 ALTER TABLE `posty`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
 --
 -- AUTO_INCREMENT dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
