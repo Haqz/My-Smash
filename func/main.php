@@ -38,30 +38,31 @@ require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../co
     	}
 
     	$id = $_SESSION['id'];
-        foreach($db->query("SELECT Count(user_id) AS id FROM posty WHERE user_id=$id") as $row) {
-        	echo'
+        $count = $db->prepare("SELECT * FROM posts WHERE user_id=$id");
+        $count->execute();
+        $cc = $count->rowCount();
+        echo'
             <div class="cardP">
                 <div class="cardP-block">
                     <h4 class="cardP-title">'.$_SESSION['nick'].'</h4>
                     <img src="../uploads/av.jpg" class="img-circle" width="250" height="250">
                     <p class="cardP-text">  '.$_SESSION['email'].'</p>
-                    <p class="cardP-text"> '.$row['id'].'</p>
+                    <p class="cardP-text"> '.$cc.'</p>
                     <p class="cardP-text"> '.$_SESSION['ip'].'</p>
                     <p class="cardP-text"> '.$uis.'</p>
                 </div>
             </div>';
-        }
     }
     function addPost(){
     	global $db;
 
-		$sql = "SELECT * FROM posty";
+		$sql = "SELECT * FROM posts";
 		$result = $db->query($sql);
 		$f1 = $_POST['post'];
 		$f2 = $_POST['nick'];
 		$f3 = $_POST['id'];
 		if ($f1 == true){
-			$stmt = $db->prepare("INSERT INTO posty(content,creator,user_id) VALUES(:f1,:f2,:f3)");
+			$stmt = $db->prepare("INSERT INTO posts(content,creator,user_id) VALUES(:f1,:f2,:f3)");
 			$stmt->execute(array(':f1' => $f1, ':f2' => $f2, ':f3' => $f3));
 			$affected_rows = $stmt->rowCount();
 			header('Location: index.php');
@@ -69,7 +70,7 @@ require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../co
     }
     function printPosts(){
 	global $db;
-	foreach($db->query('SELECT * FROM `posty` ORDER BY `posty`.`id` DESC') as $row) {
+	foreach($db->query('SELECT * FROM `posts` ORDER BY `posts`.`id` DESC') as $row) {
         	echo'
 
           <div class="cardP">

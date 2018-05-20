@@ -43,8 +43,8 @@
     <div class="row">
       <?php
         printPosts();
+        
       ?>
-      
     </div>
   </div>
 </body>

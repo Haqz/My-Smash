@@ -79,7 +79,7 @@
 			else
 			{
 				//Czy email już istnieje?
-				$rezultat = $polaczenie->query("SELECT id FROM uzytkownicy WHERE email='$email'");
+				$rezultat = $polaczenie->query("SELECT id FROM users WHERE email='$email'");
 				
 				if (!$rezultat) throw new Exception($polaczenie->error);
 				
@@ -91,7 +91,7 @@
 				}		
 
 				//Czy nick jest już zarezerwowany?
-				$rezultat = $polaczenie->query("SELECT id FROM uzytkownicy WHERE nick='$nick'");
+				$rezultat = $polaczenie->query("SELECT id FROM users WHERE nick='$nick'");
 				
 				if (!$rezultat) throw new Exception($polaczenie->error);
 				
@@ -106,7 +106,7 @@
 				{
 					//Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
 					
-					if ($polaczenie->query("INSERT INTO uzytkownicy(nick,pass,email) VALUES ('$nick', '$haslo_hash', '$email')"))
+					if ($polaczenie->query("INSERT INTO users(nick,pass,email) VALUES ('$nick', '$haslo_hash', '$email')"))
 					{
 						$_SESSION['udanarejestracja']=true;
 						header('Location: ../index.php');
@@ -133,14 +133,15 @@
 	
 ?>
 
+<?php include '../configs/information.php' ?>
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Osadnicy - załóż darmowe konto!</title>
+	<title><?php echo "$pagename" ?></title>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-	
+	<?php include '../configs/style.php' ?>
 	<style>
 		.error
 		{
@@ -152,87 +153,145 @@
 </head>
 
 <body>
-	
+	<?php include '../page/menu.php'; ?>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Pamiętaj!</h1>
+			<p>Zakładając konto akceptujesz wszelgie regulaminy! :) Lepiej Przeczytaj :P</p>
+		</div>
+	</div>
+
+	<form method="post" class="form-horizontal">
+		<div class="row">
+			<div class="col-xs-6 col-md-4"></div>
+		  	<div class="col-xs-6 col-md-4 form-group">
+			    <label for="inputEmail3" class="col-xs-6 col-md-4 control-label">Login</label>
+			    <div class="col-xs-6 col-md-4">
+					<input type="text"  class="form-control" id="inputEmail3" placeholder="Login" value="<?php
+						if (isset($_SESSION['fr_nick']))
+						{
+							echo $_SESSION['fr_nick'];
+							unset($_SESSION['fr_nick']);
+						}
+						?>" name="nick" />
+			    </div>
+		  	</div>
+			<div class="col-xs-6 col-md-4"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-md-4"></div>
+		  	<div class="col-xs-6 col-md-4 form-group">
+			    <label for="inputEmail3" class="col-xs-6 col-md-4 control-label">E-Mail</label>
+			    <div class="col-xs-6 col-md-4">
+					<input type="emailq" placeholder="Email" class="form-control"  value="<?php
+						if (isset($_SESSION['fr_email']))
+						{
+							echo $_SESSION['fr_email'];
+							unset($_SESSION['fr_email']);
+						}
+						?>" name="email" />
+			    </div>
+		  	</div>
+			<div class="col-xs-6 col-md-4"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-md-4"></div>
+		  	<div class="col-xs-6 col-md-4 form-group">
+			    <label for="inputEmail3" class="col-xs-6 col-md-4 control-label">Hasło</label>
+			    <div class="col-xs-9 col-md-4">
+					<input type="password" class="form-control" placeholder="Hasło" value="<?php
+						if (isset($_SESSION['fr_haslo1']))
+						{
+							echo $_SESSION['fr_haslo1'];
+							unset($_SESSION['fr_haslo1']);
+						}
+						?>" name="haslo1" />
+			    </div>
+		  	</div>
+			<div class="col-xs-6 col-md-4"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-md-4"></div>
+			<div class="col-xs-6 col-md-4 form-group">
+				<label for="inputEmail3" class="col-xs-6 col-md-4 control-label">Powtórz Hasło</label>
+				<div class="col-xs-6 col-md-4">
+					<input type="password" class="form-control" placeholder="Powtórz Hasło" value="<?php
+						if (isset($_SESSION['fr_haslo2']))
+						{
+							echo $_SESSION['fr_haslo2'];
+							unset($_SESSION['fr_haslo2']);
+						}
+					?>" name="haslo2" />
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-4"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-md-4"></div>
+			<div class="col-xs-6 col-md-4 form-group">
+				<label for="inputEmail3" class="col-xs-6 col-md-4 control-label">Avatar</label>
+				<div class="col-xs-6 col-md-4">
+					<input type="file" name="fileToUpload" id="fileToUpload">
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-4"></div>
+		</div>
+
+
+			<div class="col-xs-6 col-md-4"></div>
+		  	<div class="form-group">
+			    <div class="col-xs-6 col-md-4">
+			      	<div class="checkbox">
+			        	<label>
+							<input type="checkbox" name="regulamin" <?php
+							if (isset($_SESSION['fr_regulamin']))
+							{
+								echo "checked";
+								unset($_SESSION['fr_regulamin']);
+							}
+									?>/> Akceptuje regulamin.
+			        	</label>
+			      </div>
+
+			    </div>
+		  	</div>
+
+		<div class="col-xs-6 col-md-4"></div>
+		  	<div class="form-group">
+			    <div class="col-xs-2 col-md-4">
+			      	<button type="submit" class="btn btn-default">Zarejestruj</button>
+			    </div>
+		  	</div>
+		<div class="col-xs-6 col-md-4"></div>
+		<div class="col-xs-2 col-md-4"></div>
+		<div class="col-xs-2 col-md-4"></div>
+	</form>
 	<form method="post">
-	
-		Nickname: <br /> <input type="text" value="<?php
-			if (isset($_SESSION['fr_nick']))
-			{
-				echo $_SESSION['fr_nick'];
-				unset($_SESSION['fr_nick']);
-			}
-		?>" name="nick" /><br />
-		
 		<?php
 			if (isset($_SESSION['e_nick']))
 			{
 				echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
 				unset($_SESSION['e_nick']);
-			}
-		?>
-		
-		E-mail: <br /> <input type="text" value="<?php
-			if (isset($_SESSION['fr_email']))
-			{
-				echo $_SESSION['fr_email'];
-				unset($_SESSION['fr_email']);
-			}
-		?>" name="email" /><br />
-		
-		<?php
-			if (isset($_SESSION['e_email']))
+			} elseif (isset($_SESSION['e_email']))
 			{
 				echo '<div class="error">'.$_SESSION['e_email'].'</div>';
 				unset($_SESSION['e_email']);
-			}
-		?>
-		
-		Twoje hasło: <br /> <input type="password"  value="<?php
-			if (isset($_SESSION['fr_haslo1']))
-			{
-				echo $_SESSION['fr_haslo1'];
-				unset($_SESSION['fr_haslo1']);
-			}
-		?>" name="haslo1" /><br />
-		
-		<?php
-			if (isset($_SESSION['e_haslo']))
+			} elseif (isset($_SESSION['e_haslo']))
 			{
 				echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
 				unset($_SESSION['e_haslo']);
-			}
-		?>		
-		
-		Powtórz hasło: <br /> <input type="password" value="<?php
-			if (isset($_SESSION['fr_haslo2']))
-			{
-				echo $_SESSION['fr_haslo2'];
-				unset($_SESSION['fr_haslo2']);
-			}
-		?>" name="haslo2" /><br />
-		
-		<label>
-			<input type="checkbox" name="regulamin" <?php
-			if (isset($_SESSION['fr_regulamin']))
-			{
-				echo "checked";
-				unset($_SESSION['fr_regulamin']);
-			}
-				?>/> Akceptuję regulamin
-		</label>
-		
-		<?php
-			if (isset($_SESSION['e_regulamin']))
+			} elseif (isset($_SESSION['e_regulamin']))
 			{
 				echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
 				unset($_SESSION['e_regulamin']);
 			}
-		?>	
-		
-		<br />
-		
-		<input type="submit" value="Zarejestruj się" />
-		
+		?>
+	<br />
 	</form>
 
 </body>

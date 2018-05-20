@@ -51,7 +51,7 @@
                                           </div>
                                           <div class="form-group">
                                              <label class="sr-only" for="exampleInputPassword2">Hasło</label>
-                                             <input type="password" name="haslo" class="form-control" id="exampleInputPassword2" placeholder="Hasło" required>
+                                             <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Hasło" required>
 
                                              <div class="help-block text-right"><a href="">Zapomniałeś hasła?</a></div>
                                           </div>

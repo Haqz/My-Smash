@@ -37,11 +37,11 @@
 
     <div class="row">
       <?php
-        $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
+        $db = new PDO('mysql:host=localhost;dbname=smashy;charset=utf8mb4', 'root', '');
         $sql = "SELECT * FROM posty";
         $result = $db->query($sql);
 
-        foreach($db->query('SELECT * FROM `uzytkownicy` ORDER BY `id`') as $row) {
+        foreach($db->query('SELECT * FROM `users` ORDER BY `id`') as $row) {
           echo'
             <div class="col-md-8" style="position:relative;">
               <blockquote class="quote-box">
