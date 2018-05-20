@@ -104,18 +104,16 @@
 				
 				if ($wszystko_OK==true)
 				{
-					//Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
-					
-					if ($polaczenie->query("INSERT INTO users(nick,pass,email) VALUES ('$nick', '$haslo_hash', '$email')"))
-					{
+					$f1 = $nick;
+					$f2 = $haslo_hash;
+					$f3 = $email;
+					if ($f1 == true){
+						$stmt = $db->prepare("INSERT INTO users(nick,pass,email) VALUES(:f1,:f2,:f3)");
+						$stmt->execute(array(':f1' => $f1, ':f2' => $f2, ':f3' => $f3));
+						$affected_rows = $stmt->rowCount();
 						$_SESSION['udanarejestracja']=true;
 						header('Location: ../index.php');
 					}
-					else
-					{
-						throw new Exception($polaczenie->error);
-					}
-					
 				}
 				
 				$polaczenie->close();

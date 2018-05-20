@@ -18,13 +18,11 @@
 
 
 
-                if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
-                {
+                if (isset($_SESSION['zalogowany'])){
                   //Jezeli uzytkownik jest zalogowany to widzi TO:
-
-                      if ($_SESSION['admin']==true) {
-                    		echo '<li><a href="acp/index.php"><span class="glyphicon glyphicon-bullhorn"></span> Panel</a></li>';
-                    	}
+                  if ($_SESSION['admin']) {
+                    echo '<li><a href="acp/index.php"><span class="glyphicon glyphicon-bullhorn"></span> Panel</a></li>';
+                  }
                   echo '
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
@@ -33,38 +31,38 @@
                         <li><a href="func/logout.php"><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
                       </ul>
                     </li> ' ;
-                } else
-               {
+                }
+                else{
                  //Jezeli uzytkownik nie jest zalogowany to widzi TO:
-                              echo '<li><a href="func/rejestracja.php"><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
-
-                              <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Logowanie<span class="caret"></span></a>
-                              <ul id="login-dp" class="dropdown-menu">
-                              <li>
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <form class="form" role="form" action="func/zaloguj.php" method="post" accept-charset="UTF-8" id="login-nav">
-                                          <div class="form-group">
-                                             <label class="sr-only" for="exampleInputEmail2">Login</label>
-                                             <input type="text" name="login" class="form-control" id="exampleInputEmail2" placeholder="Login" required>
-                                          </div>
-                                          <div class="form-group">
-                                             <label class="sr-only" for="exampleInputPassword2">Hasło</label>
-                                             <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Hasło" required>
-
-                                             <div class="help-block text-right"><a href="">Zapomniałeś hasła?</a></div>
-                                          </div>
-                                          <div class="col-md-12">
-                                          <button style="float:right;margin-bottom:7%;margin-top:-3%;" type="submit" class="btn btn-success navbar-right">Zaloguj</button>
-                                          </div>
-                                       </form>
-
-                                    </div>
-                                 </div>
-                              </li>
-                              </ul>
-                              </li>' ;
+                   echo '
+                    <li>
+                      <a href="func/rejestracja.php"><span class="glyphicon glyphicon-user"></span> Rejestracja</a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Logowanie<span class="caret"></span></a>
+                      <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <form class="form" role="form" action="func/zaloguj.php" method="post" accept-charset="UTF-8" id="login-nav">
+                                <div class="form-group">
+                                  <label class="sr-only" for="exampleInputEmail2">Login</label>
+                                  <input type="text" name="login" class="form-control" id="exampleInputEmail2" placeholder="Login" required>
+                                </div>
+                                <div class="form-group">
+                                  <label class="sr-only" for="exampleInputPassword2">Hasło</label>
+                                  <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Hasło" required>
+                                  <div class="help-block text-right"><a href="">Zapomniałeś hasła?</a></div>
+                                </div>
+                                <div class="col-md-12">
+                                  <button style="float:right;margin-bottom:7%;margin-top:-3%;" type="submit" class="btn btn-success navbar-right">Zaloguj</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>' ;
                 }
               ?>
       </ul>

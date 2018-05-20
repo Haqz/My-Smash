@@ -50,9 +50,8 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="../index.php">Main</a>
         </li>
-        <li class="breadcrumb-item active">My Dashboard</li>
       </ol>
       <!-- Icon Cards-->
       <div class="row">
@@ -63,8 +62,8 @@
                 <i class="fa fa-fw fa-comments"></i>
               </div>
               <div class="mr-5"><?php
-        $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
-        $sths = $db->prepare('SELECT COUNT(id) as c FROM posty');
+        $db = new PDO('mysql:host=localhost;dbname=smashy;charset=utf8mb4', 'root', '');
+        $sths = $db->prepare('SELECT COUNT(id) as c FROM posts');
         $sths->execute();
         $row = $sths->fetch();
         echo $row['c'];
@@ -85,8 +84,8 @@
                 <i class="fa fa-fw fa-list"></i>
               </div>
               <div class="mr-5"><?php
-        $db = new PDO('mysql:host=localhost;dbname=facesmash;charset=utf8mb4', 'root', '');
-        $sths = $db->prepare('SELECT COUNT(id) as c FROM uzytkownicy');
+        $db = new PDO('mysql:host=localhost;dbname=smashy;charset=utf8mb4', 'root', '');
+        $sths = $db->prepare('SELECT COUNT(id) as c FROM users');
         $sths->execute();
         $row = $sths->fetch();
         echo $row['c'];

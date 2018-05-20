@@ -56,8 +56,6 @@ require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../co
     function addPost(){
     	global $db;
 
-		$sql = "SELECT * FROM posts";
-		$result = $db->query($sql);
 		$f1 = $_POST['post'];
 		$f2 = $_POST['nick'];
 		$f3 = $_POST['id'];
