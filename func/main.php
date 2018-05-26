@@ -73,8 +73,8 @@ require_once(file_exists('configs/connect.php') ? 'configs/connect.php' : '../co
 
           <div class="cardP">
           <div class="cardP-block">
-            <h4 class="cardP-title">'.$row['creator'].'</h4>
-            <p class="cardP-text"> >> '.$row['content'].'</br>
+            <h4 class="cardP-title">'.htmlspecialchars($row['creator'], ENT_QUOTES, 'UTF-8').'</h4>
+            <p class="cardP-text"> >> '.htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8').'</br>
             <img src="uploads/av.jpg" class="img-circle" height="50" width="50"></p>
           </div>
         </div>

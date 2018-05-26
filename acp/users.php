@@ -1,7 +1,6 @@
 <?php
     session_start();
-
-    error_reporting(0);
+    include '../configs/connect.php';
 
     if ((isset($_SESSION['zalogowany'])))
     {
@@ -37,10 +36,7 @@
 
     <div class="row">
       <?php
-        $db = new PDO('mysql:host=localhost;dbname=smashy;charset=utf8mb4', 'root', '');
-        $sql = "SELECT * FROM posty";
-        $result = $db->query($sql);
-
+        global $db;
         foreach($db->query('SELECT * FROM `users` ORDER BY `id`') as $row) {
           echo'
             <div class="col-md-8" style="position:relative;">

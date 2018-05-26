@@ -2,7 +2,7 @@
     require_once "../configs/connect.php";
     function deletePost(){
         global $db;
-        if ($_POST['id']) {
+        if ($_POST['deletePost']) {
             $id = $_POST['id'];
 
             $sql = "DELETE FROM posts WHERE id=?";

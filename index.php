@@ -1,11 +1,11 @@
-<?php
+<?php/*
   include 'configs/information.php';
   include 'func/main.php';
 	session_start();
 	//error_reporting(0);
   if(isset($_POST['post'])){
     addPost();
-  }
+  }*/
 
 ?>
 <!DOCTYPE HTML>
@@ -17,10 +17,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title><?php echo "$pagename"; ?></title>
-  <?php include 'configs/style.php'; ?>
+	<title><?php /*echo "$pagename";*/ ?></title>
+  <?php /*include 'configs/style.php';*/ ?>
 </head>
-<body>
+<body>/
+  
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -32,28 +33,23 @@
       </button>
       <a class="navbar-brand" href="#">MySmash</a>
     </div>
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-           <?php
-                if (isset($_SESSION['zalogowany'])){
-                  //Jezeli uzytkownik jest zalogowany to widzi TO:
-                  if ($_SESSION['admin']) {
-                    echo '<li><a href="acp/index.php"><span class="glyphicon glyphicon-bullhorn"></span> Panel</a></li>';
-                  }
-                  echo '
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="profile/profile.php"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
-                        <li><a href="func/logout.php"><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
-                      </ul>
-                    </li> ' ;
-                }
-                else{
-                 //Jezeli uzytkownik nie jest zalogowany to widzi TO:
-                   echo '
-                    <li>
+        <?php/*
+          if (isset($_SESSION['zalogowany'])){
+            if ($_SESSION['admin']){
+              echo '<li><a href="acp/index.php"><span class="glyphicon glyphicon-bullhorn"></span> Panel</a></li>';
+            }
+            echo '
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="profile/profile.php"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
+                  <li><a href="func/logout.php"><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
+                </ul>
+              </li> ' ;
+          } else{
+              echo '<li>
                       <a href="func/rejestracja.php"><span class="glyphicon glyphicon-user"></span> Rejestracja</a>
                     </li>
                     <li class="dropdown">
@@ -81,21 +77,21 @@
                         </li>
                       </ul>
                     </li>' ;
-                }
-              ?>
+            }*/
+        ?>
       </ul>
     </div>
   </div>
 </nav>
-  <?php
+  <?php/*
   	if(isset($_SESSION['blad'])){
       echo '<div class="alert alert-danger" role="alert" style="color: white">'.$_SESSION['blad'].'</div>';
-    }	
+    }	*/
 
   ?>
 
   <div class="container">
-    <?php
+    <?php/*
       if (checkLoginState()){
         echo '
           <form method="post">
@@ -103,11 +99,11 @@
             <input type="hidden" name="id" value="'.$_SESSION['id'].'">
             <input type="textarea" class="form-control" rows="3" id="textArea" name="post"></textarea>
           </form>';
-      }
+      }*/
     ?>
     <div class="row">
-      <?php
-        printPosts();
+      <?php/*
+        printPosts();*/
       ?>
     </div>
   </div>
