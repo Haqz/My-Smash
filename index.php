@@ -1,11 +1,11 @@
-<?php/*
+<?php
   include 'configs/information.php';
   include 'func/main.php';
 	session_start();
 	//error_reporting(0);
   if(isset($_POST['post'])){
     addPost();
-  }*/
+  }
 
 ?>
 <!DOCTYPE HTML>
@@ -17,8 +17,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title><?php /*echo "$pagename";*/ ?></title>
-  <?php /*include 'configs/style.php';*/ ?>
+	<title><?php echo "$pagename"; ?></title>
+  <?php include 'configs/style.php'; ?>
 </head>
 <body>/
   
