@@ -1,6 +1,15 @@
 r
 racp
-macp/css
+racp/css
+racp/css/plugins
+racp/font-awesome/css
+racp/font-awesome/fonts
+racp/font-awesome/less
+racp/font-awesome/scss
+racp/fonts
+racp/js
+racp/js/plugins/flot
+racp/js/plugins/morris
 rapi/v1
 massests/css
 mconfigs

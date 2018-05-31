@@ -20,7 +20,7 @@
 	<title><?php echo "$pagename"; ?></title>
   <?php include 'configs/style.php'; ?>
 </head>
-<body>/
+<body>
   
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -35,7 +35,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <?php/*
+        <?php
           if (isset($_SESSION['zalogowany'])){
             if ($_SESSION['admin']){
               echo '<li><a href="acp/index.php"><span class="glyphicon glyphicon-bullhorn"></span> Panel</a></li>';
@@ -77,33 +77,34 @@
                         </li>
                       </ul>
                     </li>' ;
-            }*/
+            }
         ?>
       </ul>
     </div>
   </div>
 </nav>
-  <?php/*
+  <?php
   	if(isset($_SESSION['blad'])){
       echo '<div class="alert alert-danger" role="alert" style="color: white">'.$_SESSION['blad'].'</div>';
-    }	*/
+    }	
 
   ?>
 
   <div class="container">
-    <?php/*
+    <?php
       if (checkLoginState()){
         echo '
           <form method="post">
             <input type="hidden" name="nick" value="'.$_SESSION['nick'].'">
             <input type="hidden" name="id" value="'.$_SESSION['id'].'">
-            <input type="textarea" class="form-control" rows="3" id="textArea" name="post"></textarea>
+            <textarea class="form" cols="50" rows="5" name="post" placeholder="Type something"></textarea>
           </form>';
-      }*/
+      }
     ?>
     <div class="row">
-      <?php/*
-        printPosts();*/
+      <?php
+        printPosts("posts","id");
+        
       ?>
     </div>
   </div>

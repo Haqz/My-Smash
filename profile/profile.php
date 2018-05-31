@@ -95,9 +95,18 @@
     </div>
   </div>
 </nav>
-
+  <form method="post">
+  <select>
+  <option value="5">Volvo</option>
+  <option value="10">Saab</option>
+  <option value="15">Opel</option>
+  <option value="20">Audi</option>
+</select>
+<input type="submit" name="lengthPosts">
+</form>
     <?php 
         printProfile();
+        printSessionPosts(5);
     ?>
 </body>
 </html>
