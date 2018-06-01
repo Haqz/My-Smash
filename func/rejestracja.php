@@ -151,12 +151,24 @@
 </head>
 
 <body>
-	<?php include '../page/menu.php'; ?>
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.php">MySmash</a>
+    </div>
+  </div>
+</nav>
 
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Pamiętaj!</h1>
-			<p>Zakładając konto akceptujesz wszelgie regulaminy! :) Lepiej Przeczytaj :P</p>
+			<p>Zakładając konto akceptujesz wszelkie regulaminy!</p>
 		</div>
 	</div>
 
@@ -252,7 +264,7 @@
 								echo "checked";
 								unset($_SESSION['fr_regulamin']);
 							}
-									?>/> Akceptuje regulamin.
+									?>/> Akceptuje <a href="../regulamin.pdf" target="_blank">regulamin</a>.
 			        	</label>
 			      </div>
 
@@ -265,9 +277,6 @@
 			      	<button type="submit" class="btn btn-default">Zarejestruj</button>
 			    </div>
 		  	</div>
-		<div class="col-xs-6 col-md-4"></div>
-		<div class="col-xs-2 col-md-4"></div>
-		<div class="col-xs-2 col-md-4"></div>
 	</form>
 	<form method="post">
 		<?php

@@ -52,8 +52,8 @@
               echo '<li>
                       <a href="func/rejestracja.php"><span class="glyphicon glyphicon-user"></span> Rejestracja</a>
                     </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Logowanie<span class="caret"></span></a>
+                    <li class="dropdown show">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login<span class="caret"></span></a>
                       <ul id="login-dp" class="dropdown-menu">
                         <li>
                           <div class="row">
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label class="sr-only" for="exampleInputPassword2">Hasło</label>
-                                  <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Hasło" required>
+                                  <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
                                   <div class="help-block text-right"><a href="">Zapomniałeś hasła?</a></div>
                                 </div>
                                 <div class="col-md-12">
@@ -90,23 +90,37 @@
 
   ?>
 
-  <div class="container">
+  <div class="containerMain">
     <?php
       if (checkLoginState()){
         echo '
           <form method="post">
             <input type="hidden" name="nick" value="'.$_SESSION['nick'].'">
             <input type="hidden" name="id" value="'.$_SESSION['id'].'">
-            <textarea class="form" cols="50" rows="5" name="post" placeholder="Type something"></textarea>
+            <input type="text" class="forms" cols="50" rows="5" name="post" placeholder="Type something"></textarea>
           </form>';
       }
     ?>
-    <div class="row">
-      <?php
-        printPosts("posts","id");
+    <div class="contentLeft">
+        <?php
+          printPosts("posts","id");
         
-      ?>
-    </div>
+        ?>
+        </div>
+        <div class="sidebar-menu">
+     <div class="sidebar-menu-content">
+      <h4>Login now!</h4>
+        <ul>
+          <li>
+            <input type="text" name="nick" placeholder="Login">
+          </li>
+            <li>
+            <input type="text" name="nick" placeholder="Login">
+          </li>
+        </ul>
+     </div>
+</div>
+
   </div>
 </body>
 </html>
