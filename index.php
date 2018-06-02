@@ -94,10 +94,10 @@
     <?php
       if (checkLoginState()){
         echo '
-          <form method="post">
+          <form method="post" style="margin-bottom: 15px;">
             <input type="hidden" name="nick" value="'.$_SESSION['nick'].'">
             <input type="hidden" name="id" value="'.$_SESSION['id'].'">
-            <input type="text" class="forms" cols="50" rows="5" name="post" placeholder="Type something"></textarea>
+            <textarea class="forms" cols="50" rows="5" name="post" placeholder="Type something" onkeypress="if(event && event.keyCode == 13 && !event.shiftKey) { this.parentElement.submit(); }"></textarea>
           </form>';
       }
     ?>
@@ -109,7 +109,7 @@
         </div>
         <div class="sidebar-menu">
      <div class="sidebar-menu-content">
-      <h4>Login now!</h4>
+      <span>Login now!</span>
         <ul>
           <li>
             <input type="text" name="nick" placeholder="Login">
