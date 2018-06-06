@@ -1,6 +1,4 @@
 <?php
-require_once 'bbcode.php';
-$text = bbcode::tohtml('[b]pogrubienie[/b]');
-echo $text;
-
+require_once 'func/main.php';
+printBestUsers();
 ?>

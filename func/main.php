@@ -63,6 +63,8 @@ require_once(file_exists('bbcode.php') ? 'bbcode.php' : '../bbcode.php');
         $f4 = time();
         $f1 = bbcode::tohtml($f1);
 		if (!empty($f1)){
+            $stmt1 = $db->prepare("UPDATE users SET token = token +1");
+            $stmt1->execute();
 			$stmt = $db->prepare("INSERT INTO posts(content,creator,user_id,addDate) VALUES(:f1,:f2,:f3,:f4)");
 			$stmt->execute(array(':f1' => $f1, ':f2' => $f2, ':f3' => $f3, 'f4'=>$f4));
 			$affected_rows = $stmt->rowCount();
@@ -84,10 +86,7 @@ require_once(file_exists('bbcode.php') ? 'bbcode.php' : '../bbcode.php');
                 
             </div>
             <div class="cardP-text"> 
-                '.$row['content'].'<br>
-                <div class= "cardP-footer">
-                    
-                </div>
+                '.$row['content'].'
             </div>
           </div>
         </div> 
@@ -113,5 +112,34 @@ require_once(file_exists('bbcode.php') ? 'bbcode.php' : '../bbcode.php');
         </div>
           ';
         }
+    }
+    function printBestUsers(){
+        global $db;
+        $stmt = $db->query('SELECT id FROM users');
+        $stmt->execute();
+        $users = array_column($stmt->fetchAll(), 0);
+        
+
+// Tablica w której przechowamy top 10
+$top = [];
+
+// Pętla na ID wszystkich użytkowników
+foreach($users as $id) { // W tym miejscu zamiast $id => $user w twoim wypadku wystarczy samo $id
+	// Tutaj pobierasz ilość postów które ktos napisał
+	// Query: SELECT COUNT(*) FROM posts WHERE id="$id" ($id to zmienna z foreach)
+	$stmt1 = $db->query("SELECT COUNT(*) FROM posts WHERE user_id=$id");
+    $stmt1->execute();
+    $posts = array_column($stmt1->fetchAll(), 0);
+
+	// Dodajemy poszczególnego usera oraz jego punkty do tablicy z top 10
+	$top[$id] = $posts[0];
+}
+
+// Sortujemy tablice
+arsort($top);
+
+// Pozbywamy się zbędnych elementów z tablicy (zostawiamy tylko 10 pierwszych)
+array_splice($top, 10);
+print_r($top);
     }
 ?>

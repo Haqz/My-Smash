@@ -20,25 +20,20 @@
 <body>
   
 <nav class="navbar">
+    <div class="navbar-menu">
         <?php
           if (isset($_SESSION['zalogowany'])){
             if ($_SESSION['admin']){
-              echo '<li><a href="acp/index.php"><span class="glyphicon glyphicon-bullhorn"></span> Panel</a></li>';
+              echo '<a href="acp/index.php">Panel</a>';
             }
             echo '
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="profile/profile.php"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
-                  <li><a href="func/logout.php"><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
-                </ul>
-              </li> ' ;
+                <a href="profile/profile.php">Profil</a>
+                <a href="func/logout.php">Wyloguj</a> ' ;
           } else{
-              echo '<li>
-                      <a href="func/rejestracja.php"><span class="glyphicon glyphicon-user"></span> Rejestracja</a>
-                    </li>' ;
+              echo '<a href="func/rejestracja.php"> Rejestracja</a>' ;
             }
         ?>
+        </div>
 </nav>
   <?php
   	if(isset($_SESSION['blad'])){
@@ -51,7 +46,7 @@
     <?php
       if (checkLoginState()){
         echo '
-          <form method="post" style="margin-bottom: 15px;">
+          <form method="post" style="margin-bottom: 2em; margin-top:2em;">
             <input type="hidden" name="nick" value="'.$_SESSION['nick'].'">
             <input type="hidden" name="id" value="'.$_SESSION['id'].'">
             <textarea class="forms" cols="50" rows="5" name="post" placeholder="Type something" onkeypress="if(event && event.keyCode == 13 && !event.shiftKey) { this.parentElement.submit(); }"></textarea>
@@ -84,6 +79,17 @@
                 <button class="sidebar-input-submit" type="submit">Zaloguj</button>
             </div>
         </form>
+    </div>
+    ';
+      }else{
+          echo'
+    <div class="sidebar-menu-content">
+        <h4>Best users!</h4>
+        <span class="sidebar-textbox"> 1</span>
+        <span class="sidebar-textbox"> 1</span>
+        <span class="sidebar-textbox"> 1</span>
+        <span class="sidebar-textbox"> 1</span>
+        <span class="sidebar-textbox"> 1</span>
     </div>
     ';
       }
