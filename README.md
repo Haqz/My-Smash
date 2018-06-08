@@ -1,7 +1,9 @@
 # What is completed? #
 ### Saving posts to the database ###
 ### Selecting the posts from the database ###
+### Deleting posts by admins ###
+### Good CSS style ###
 
 # To do list #
-### Deleting posts by admins ###
-### Making the appearance of the page ###
+### Top 10 ###
+### And more... ###
