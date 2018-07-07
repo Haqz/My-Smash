@@ -27,7 +27,8 @@
               echo '<a href="acp/index.php">Panel</a>';
             }
             echo '
-                <a href="profile/profile.php">Profil</a>
+                <a href="social/social.php">Społeczność</a>
+                <a href="social/profile.php">Profil</a>
                 <a href="func/logout.php">Wyloguj</a> ' ;
           } else{
               echo '<a href="func/rejestracja.php"> Rejestracja</a>' ;
@@ -82,18 +83,11 @@
     </div>
     ';
       }else{
-          echo'
-    <div class="sidebar-menu-content">
+          echo'<div class="sidebar-menu-content">
         <h4>Best users!</h4>
-        <span class="sidebar-textbox"> 1</span>
-        <span class="sidebar-textbox"> 1</span>
-        <span class="sidebar-textbox"> 1</span>
-        <span class="sidebar-textbox"> 1</span>
-        <span class="sidebar-textbox"> 1</span>
-    </div>
-    ';
-      }
-        
+        '.printBestUsers().'
+    </div>';
+      }      
 ?>
 </div>
           

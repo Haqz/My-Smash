@@ -113,33 +113,34 @@ require_once(file_exists('bbcode.php') ? 'bbcode.php' : '../bbcode.php');
           ';
         }
     }
-    function printBestUsers(){
+   function printBestUsers(){
         global $db;
         $stmt = $db->query('SELECT id FROM users');
         $stmt->execute();
         $users = array_column($stmt->fetchAll(), 0);
         
-
-// Tablica w której przechowamy top 10
 $top = [];
-
-// Pętla na ID wszystkich użytkowników
-foreach($users as $id) { // W tym miejscu zamiast $id => $user w twoim wypadku wystarczy samo $id
-	// Tutaj pobierasz ilość postów które ktos napisał
-	// Query: SELECT COUNT(*) FROM posts WHERE id="$id" ($id to zmienna z foreach)
-	$stmt1 = $db->query("SELECT COUNT(*) FROM posts WHERE user_id=$id");
+foreach($users as $id) {
+    $stmt1 = $db->query("SELECT COUNT(*) FROM posts WHERE user_id=$id");
     $stmt1->execute();
     $posts = array_column($stmt1->fetchAll(), 0);
 
-	// Dodajemy poszczególnego usera oraz jego punkty do tablicy z top 10
-	$top[$id] = $posts[0];
+    $top[$id] = $posts[0];
 }
-
-// Sortujemy tablice
+        
 arsort($top);
 
-// Pozbywamy się zbędnych elementów z tablicy (zostawiamy tylko 10 pierwszych)
-array_splice($top, 10);
-print_r($top);
+$out = "";
+
+  foreach($top as $id => $posts){
+    $stmt = $db->query("SELECT nick FROM users WHERE id=$id");
+    $stmt->execute();
+    $nick = $stmt->fetchColumn();
+      
+    $out .= "<div class='sidebar-textbox'>$nick<div class ='sidebar-textbox-right'>$posts</div></div>";
+    
+}
+
+return $out;
     }
 ?>
