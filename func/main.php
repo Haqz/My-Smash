@@ -65,7 +65,7 @@ require_once(file_exists('bbcode.php') ? 'bbcode.php' : '../bbcode.php');
 		if (!empty($f1)){
             $stmt1 = $db->prepare("UPDATE users SET token = token +1");
             $stmt1->execute();
-			$stmt = $db->prepare("INSERT INTO posts(content,creator,user_id,addDate) VALUES(:f1,:f2,:f3,:f4)");
+			$stmt = $db->prepare("INSERT INTO posts(content,creator,user_id,add_date) VALUES(:f1,:f2,:f3,:f4)");
 			$stmt->execute(array(':f1' => $f1, ':f2' => $f2, ':f3' => $f3, 'f4'=>$f4));
 			$affected_rows = $stmt->rowCount();
 			header('Location: index.php');
@@ -74,7 +74,7 @@ require_once(file_exists('bbcode.php') ? 'bbcode.php' : '../bbcode.php');
     function printPosts($where, $order_by){
 	global $db;
 	foreach($db->query('SELECT * FROM '.$where.' ORDER BY '.$order_by.' DESC') as $row) {
-        $addStamp = date("d/m/Y",$row['addDate']);
+        $addStamp = date("d/m/Y",$row['add_date']);
         	echo'
 
           <div class="cardP">
